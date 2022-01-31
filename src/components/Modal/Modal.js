@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { createPortal } from "react-dom";
 import propTypes from "prop-types";
 import style from "./modal.module.css";
+import s from "./Screenshot_1.png";
 
 const modalRoot = document.querySelector("#modal__root");
 
@@ -23,11 +24,17 @@ class Modal extends Component {
     }
   };
 
+  ahndleBackdropClick = (e) => {
+    if (e.currentTarget === e.target) {
+      this.props.onClose();
+    }
+  };
+
   render() {
     return createPortal(
-      <div className={style.Overlay}>
+      <div className={style.Overlay} onClick={this.ahndleBackdropClick}>
         <div className={style.Modal}>
-          <img src="" alt="" />
+          <img src={s} alt="" />
         </div>
       </div>,
       modalRoot
