@@ -16,7 +16,7 @@ export default class Searchapi extends Component {
         `${URL}?q=${nextName}&page=1&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
       )
         .then((res) => res.json())
-        .then((picture) => this.setState({ picture }))
+        .then((picture) => this.setState(picture.hits))
         .then(console.log);
     }
   }
@@ -26,9 +26,9 @@ export default class Searchapi extends Component {
       <div>
         {this.state.picture && (
           <ul className="gallery">
-            {this.state.picture.map((e) => (
+            {this.state.map((e) => (
               <li className="gallery-item">
-                <img src={e.hits.webformatURL} alt="" />
+                <img src={e.webformatURL} alt="" />
               </li>
             ))}
           </ul>
