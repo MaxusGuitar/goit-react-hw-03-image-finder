@@ -16,8 +16,7 @@ class Searchbar extends Component {
 
     if (this.state.pictureName.trim() === "") {
       //trim() - delete spaces
-      alert("Please enter the picture name!");
-      return;
+      return toast.warn("Please enter the picture name!");
     }
 
     this.props.onSubmit(this.state.pictureName);

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Searchbar from "./components/Seacrhbar";
 import Modal from "./components/Modal";
+import Searchapi from "./components/Searchapi";
 
 //import FindContact from "./FindContact";
 //import shortid from "shortid";
@@ -11,7 +13,6 @@ class App extends Component {
   state = {
     showModal: false,
     pictureName: "",
-    loading: false,
   };
 
   // async componentDidMount() {
@@ -44,6 +45,7 @@ class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit} />
+        <Searchapi pictureName={this.state.pictureName} />
         {showModal && <Modal onClose={this.toggleModal} />}
         {/* {this.state.loading && <h2>Load</h2>}
         {this.state.photo && (
