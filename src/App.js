@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Searchbar from "./components/Seacrhbar";
 import ImageGallery from "./components/ImageGallery";
 import Modal from "./components/Modal";
-import { API } from "./services/API";
+import { getAPI } from "./services/API";
 
 //import FindContact from "./FindContact";
 //import shortid from "shortid";
@@ -20,7 +20,7 @@ class App extends Component {
 
   componentDidUpdate(prewProps, prewState) {
     if (prewState.pictureName !== this.state.pictureName) {
-      API(this.state.pictureName).then((result) => {
+      getAPI(this.state.pictureName).then((result) => {
         console.log(result);
         this.setState((prewState) => {
           return {
@@ -48,7 +48,6 @@ class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={handleFormSubmit} />
-        <API pictureName={pictureName} />
         {showModal && <Modal onClose={toggleModal} />}
         <ImageGallery picture={picture} />
         <ToastContainer autoClose={3000} />
