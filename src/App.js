@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Searchbar from "./components/Seacrhbar";
+import ImageGallery from "./components/ImageGallery";
 import Modal from "./components/Modal";
-import Searchapi from "./components/Searchapi";
+import { API } from "./services/API";
 
 //import FindContact from "./FindContact";
 //import shortid from "shortid";
@@ -13,21 +14,22 @@ class App extends Component {
   state = {
     showModal: false,
     pictureName: "",
+    picture: [],
+    loading: false,
   };
 
-  // async componentDidMount() {
-  //   this.setState({ loading: true });
-  //   const API_KEY = "24079663-849aadf309a059b421030ae2f";
-  //   fetch(
-  //     "https://pixabay.com/api/?q=cat&page=1&key=" +
-  //       API_KEY +
-  //       "&image_type=photo&orientation=horizontal&per_page=12"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((photo) => this.setState({ photo }))
-  //     .then(console.log)
-  //     .finally(() => this.setState({ loading: false }));
-  // }
+  componentDidUpdate(prewProps, prewState) {
+    if (prewState.pictureName !== this.state.pictureName) {
+      API(this.state.pictureName).then((result) => {
+        console.log(result);
+        this.setState((prewState) => {
+          return {
+            picture: [...prewState.picture, result],
+          };
+        });
+      });
+    }
+  }
 
   toggleModal = () => {
     this.setState(({ showModal }) => ({
@@ -40,21 +42,15 @@ class App extends Component {
   };
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, pictureName, picture } = this.state;
+    const { handleFormSubmit, toggleModal } = this;
 
     return (
       <div>
-        <Searchbar onSubmit={this.handleFormSubmit} />
-        <Searchapi pictureName={this.state.pictureName} />
-        {showModal && <Modal onClose={this.toggleModal} />}
-        {/* {this.state.loading && <h2>Load</h2>}
-        {this.state.photo && (
-          <ul className="gallery">
-            <li className="gallery-item">
-              <img src="{this.state.photo.q}" alt="" />
-            </li>
-          </ul>
-        )} */}
+        <Searchbar onSubmit={handleFormSubmit} />
+        <API pictureName={pictureName} />
+        {showModal && <Modal onClose={toggleModal} />}
+        <ImageGallery picture={picture} />
         <ToastContainer autoClose={3000} />
       </div>
     );

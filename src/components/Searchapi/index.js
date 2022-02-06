@@ -1,1 +1,1 @@
-export { default } from "./Searchapi";
+export { default } from "../../services/API";
