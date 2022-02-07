@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { createPortal } from "react-dom";
 import propTypes from "prop-types";
 import style from "./modal.module.css";
-import s from "./Screenshot_1.png";
 
 const modalRoot = document.querySelector("#modal__root");
 
@@ -31,10 +30,12 @@ class Modal extends Component {
   };
 
   render() {
+    const { photo, tags } = this.props;
+
     return createPortal(
       <div className={style.Overlay} onClick={this.ahndleBackdropClick}>
         <div className={style.Modal}>
-          <img src={s} alt="" />
+          <img src={photo} alt={tags} />
         </div>
       </div>,
       modalRoot
