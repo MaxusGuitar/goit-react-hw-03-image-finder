@@ -44,7 +44,7 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
-  onSubmit: propTypes.func,
+  onClose: propTypes.func,
 };
 
 export default Modal;

@@ -22,5 +22,12 @@ export default function ImageGallery({ picture }) {
 }
 
 ImageGallery.propTypes = {
-  picture: PropTypes.array,
+  picture: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      largeImageURL: PropTypes.string,
+      tags: PropTypes.string,
+      webformatURL: PropTypes.string,
+    })
+  ),
 };
