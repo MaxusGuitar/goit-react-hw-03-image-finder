@@ -5,18 +5,15 @@ import style from "./modal.module.css";
 
 const modalRoot = document.querySelector("#modal__root");
 
-//открыть модалку
 class Modal extends Component {
   componentDidMount() {
     window.addEventListener("keydown", this.handleKeyDown);
   }
 
-  //закрыть модалку
   componentWillUnmount() {
     window.removeEventListener("keydown", this.handleKeyDown);
   }
 
-  //метод для закрытия модалки по кнопке
   handleKeyDown = (e) => {
     if (e.code === `Escape`) {
       this.props.onClose();

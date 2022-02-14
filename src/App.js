@@ -7,9 +7,6 @@ import Loading from "./components/Loading";
 import LoadBtn from "./components/LoadBtn";
 import getAPI from "./services/API";
 import { toast } from "react-toastify";
-
-//import FindContact from "./FindContact";
-//import shortid from "shortid";
 import style from "./App.css";
 
 class App extends Component {
